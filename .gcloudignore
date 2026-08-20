@@ -1,0 +1,15 @@
+.git
+.github
+.next
+node_modules
+android
+docs
+extension
+supabase
+.data
+**/.env
+**/.env.*
+!.env.example
+**/__pycache__
+**/.venv
+**/node_modules

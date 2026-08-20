@@ -1,0 +1,14 @@
+{
+  "apphosting": {
+    "backendId": "recallvault-web",
+    "rootDir": ".",
+    "ignore": [
+      "android",
+      "backend",
+      "docs",
+      "supabase",
+      "extension",
+      "infra"
+    ]
+  }
+}

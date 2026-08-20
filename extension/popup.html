@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Save to ReelVault</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        width: 320px;
+        padding: 16px;
+        background: #f3eee4;
+        color: #1b1814;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 8px;
+      }
+      p,
+      code {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #6b645a;
+      }
+      button {
+        width: 100%;
+        margin-top: 12px;
+        border: 0;
+        border-radius: 999px;
+        padding: 10px;
+        background: #1f5c4d;
+        color: #fffaf1;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Save this tab</h1>
+    <p id="url">Reading the active tab…</p>
+    <p>ReelVault only receives this URL after you click Save. It does not read Instagram as you and never asks for a password.</p>
+    <button id="save">Save to ReelVault</button>
+    <script src="popup.js"></script>
+  </body>
+</html>

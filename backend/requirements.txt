@@ -1,0 +1,16 @@
+fastapi>=0.115.0,<0.116
+uvicorn[standard]>=0.34.0,<0.35
+pydantic-settings>=2.8.0
+SQLAlchemy>=2.0.40
+pg8000>=1.31.2
+cloud-sql-python-connector>=1.18.0
+google-cloud-secret-manager>=2.23.0
+google-cloud-storage>=3.1.0
+google-cloud-logging>=3.11.0
+google-cloud-error-reporting>=1.16.0
+passlib[bcrypt]>=1.7.4
+PyJWT>=2.10.1
+email-validator>=2.2.0
+slowapi>=0.1.9
+httpx>=0.28.1
+pytest>=8.3.5

@@ -1,0 +1,20 @@
+# Firebase App Hosting — Next.js frontend from GitHub main.
+# Paste-link capture works in the browser via IndexedDB even if the API URL is empty.
+runConfig:
+  minInstances: 0
+  maxInstances: 8
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_APP_NAME
+    value: RecallVault
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_API_URL
+    value: "https://recallvault-api-rjl5i43cla-uc.a.run.app"
+    availability:
+      - BUILD
+      - RUNTIME

@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReelVault
 
-## Getting Started
+**Save a Reel once. Find it later in seconds.**
 
-First, run the development server:
+A privacy-first library for Instagram Reels, posts, and other links you actually want to find again. It is not Instagram, it does not ask for an Instagram password, and it does not scrape your Saved tab.
+
+## What this starter includes
+
+- Local-first Next.js app (IndexedDB) with Inbox, Search, Collections, Rediscover, and Settings
+- Capture via paste, Android **Save to RecallVault** share target, `/capture` and `/save?url=`, PWA share target, and a Manifest V3 extension
+- Notes, multi-collection filing, tags, favorites, pins, archive, reminders
+- Natural-language search over notes, tags, creators, dates, captions, transcripts, and URLs
+- CSV / JSON / Markdown export and one-click library erase
+- Optional public preview fetch and optional SpaceXAI tag suggestions (off until you opt in)
+- Product docs in `docs/` and a Supabase RLS schema for later cloud sync
+
+## Quick start
 
 ```bash
+cd reelvault
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Create a local vault. Leave “sample library” on if you want to try queries such as:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `Python chatbot around January`
+- `Hyderabad cafes with outdoor seating`
+- `video editing hooks from a creator named editsbykira`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+npm run build
+```
 
-## Learn More
+## Optional AI
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` and set `XAI_API_KEY`. In Settings, enable AI suggestions. Notes are sent only if you check **Include my note**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Browser extension
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `extension/README.md`. Load the `extension/` folder as an unpacked Chrome/Edge add-on. It captures the active tab URL only after you click Save.
 
-## Deploy on Vercel
+## Android share sheet (RecallVault)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open `android/` in Android Studio. The app registers as **Save to RecallVault** for `ACTION_SEND` `text/plain`. It never fetches Instagram. Unpaired or offline saves go to an encrypted local queue.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pairing: Settings on the web app → Create pairing code → enter it in the Android app.
+
+Deep link fallback: `recallvault://capture?url=` and the web page `/capture`.
+
+iOS Share Extension is specified in `docs/ios-share-extension.md` (implement later).
+
+## Mobile / PWA
+
+Install the site as an app. If the native Android app is not installed, the PWA share target still lands on `/share`.
+
+## Google Cloud production
+
+| Role | Product |
+| --- | --- |
+| Frontend | **Firebase App Hosting** (Next.js, GitHub `main`) |
+| Backend | **Cloud Run** (FastAPI container, min instances 0) |
+| Database | **Cloud SQL PostgreSQL** + **pgvector** (private IP) |
+| Storage | **Cloud Storage** (private screenshot bucket) |
+| Secrets | **Secret Manager** (`JWT_SECRET`, `DB_PASSWORD`) |
+
+Paste-link capture works on the hosted web app immediately (browser IndexedDB). Android Share Target is phase 2.
+
+See `docs/architecture-gcp.md`, `docs/gcp-deployment.md`, and `docs/gcp-checklist.md`.
+
+```bash
+export PROJECT_ID=retrive-46519 BILLING_ACCOUNT=…
+./infra/gcloud/bootstrap.sh
+gcloud builds submit --config cloudbuild.yaml
+```
+
+## Privacy commitments
+
+- No Instagram credentials
+- No unofficial Instagram APIs
+- No background scraping
+- Original media stays on Instagram and may disappear
+- Your notes are yours: export them or delete them
+
+Read `docs/privacy-policy-outline.md` and `/privacy`.

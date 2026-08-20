@@ -1,0 +1,27 @@
+{
+  "name": "ReelVault",
+  "short_name": "ReelVault",
+  "description": "Save a Reel once. Find it later in seconds.",
+  "start_url": "/inbox",
+  "display": "standalone",
+  "background_color": "#f3eee4",
+  "theme_color": "#1f5c4d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
